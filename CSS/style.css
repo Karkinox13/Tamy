@@ -103,7 +103,9 @@ body{
     font-size: 16px;
     color:#545454;
     margin-bottom: 35px;
+    justify-content: left;
 }
+
 .btn-1{
     display: inline-block;
     background-color:#f09edb;
@@ -112,7 +114,6 @@ body{
     color: #ffff;
     text-transform: capitalize;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-
 }
 
 .btn-1:hover{
@@ -160,13 +161,13 @@ body{
 .nosotros{
     position: relative;
 }
+
 .bg-2{
     position: absolute;
     top: 0;
     left: 0;
     width: 400px;
     z-index: -1;
-
 }
 
 .nosotros-info{
@@ -207,6 +208,13 @@ body{
     margin-bottom: 50px;
 }
 
+.productosIndex{
+    font-size: 16px;
+    color:#545454;
+    margin-bottom: 35px;
+    justify-content: center;
+}
+
 .products{
     padding: 80px 0;
     text-align: center;
@@ -232,17 +240,26 @@ body{
     grid-gap:3rem;
 }
 
+/*  ⭐ CORRECCIÓN PARA ALINEAR TARJETAS  */
 .product{
     padding-bottom: 35px;
     text-align: center;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     border-radius: 25px;
+
+    display: flex;               /* ← añadido */
+    flex-direction: column;      /* ← añadido */
+    justify-content: space-between; /* ← añadido */
+    height: 100%;                /* ← añadido */
 }
 
 .product img{
     width: 60%;
     height: 250px;
     border-radius: 25px 25px 0 0;
+
+    display: block;
+    margin: 0 auto;
 }
 
 .product h3{
@@ -251,11 +268,14 @@ body{
     margin-top: 15px;
 }
 
+/* ⭐ DESCRIPCIONES IGUALES + JUSTIFICADAS */
 .product p{
     font-size: 16px;
     padding: 30px;
     color: #545454;
     margin: 0;
+    text-align: justify;     /* ← añadido */
+    min-height: 160px;       /* ← añadido (ajusta si necesitas más o menos) */
 }
 
 .product span{
@@ -445,8 +465,8 @@ a {
     .socials{
         margin-bottom:25px ;
     }
-
 }
+
 
 
 /* =========================================================
