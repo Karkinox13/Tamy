@@ -707,26 +707,133 @@ a {
     font-weight: bold;
 }
 
-/* ----------- LOGIN ICON ------------- */
-.login-icon a {
-    padding: 20px;
+/* ======== ADMIN VIEW ======== */
+
+.admin-body {
+    background: #ffffff;
+    font-family: 'Poppins', sans-serif;
+}
+
+.admin-header {
+    width: 100%;
+    background: #ff8ed4;
+    padding: 20px 35px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
+
+    box-shadow: 0 0 20px rgba(255, 114, 224, 0.35);
 }
 
-.login-icon svg {
-    transition: transform .2s ease;
+.admin-header h2 {
+    font-size: 28px;
+    color: #303030;
+    font-weight: 700;
 }
 
-.login-icon:hover svg {
-    transform: scale(1.15);
+.admin-user-icon svg:hover {
+    transform: scale(1.1);
+    transition: 0.2s ease;
 }
 
-/* MODO MÓVIL (icono blanco dentro del menú negro) */
-@media(max-width: 991px) {
-    .login-icon svg circle,
-    .login-icon svg path {
-        stroke: #fff;
+.admin-container {
+    padding: 40px 60px;
+}
+
+/* TARJETAS RESUMEN */
+.admin-cards {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.admin-card {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(255, 114, 224, 0.35);
+    text-align: center;
+    transition: 0.3s;
+}
+
+.admin-card:hover {
+    transform: translateY(-3px);
+}
+
+.admin-card h3 {
+    color: #000000;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.admin-card p {
+    font-size: 18px;
+    color: #646464;
+    font-weight: bold;
+}
+
+/* TABLA */
+.admin-table-section h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #303030;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(141,206,136,0.3);
+}
+
+.admin-table thead {
+    background: #fd81ce;
+    color: white;
+}
+
+.admin-table th, 
+.admin-table td {
+    padding: 15px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.admin-table tbody tr:nth-child(even) {
+    background-color: #f3f8f3;
+}
+
+/* ESTADOS DE CITAS */
+.estado.ok {
+    color: #3c8f46;
+    font-weight: 700;
+}
+
+.estado.pendiente {
+    color: #cc8b1f;
+    font-weight: 700;
+}
+
+.estado.cancelada {
+    color: #c0392b;
+    font-weight: 700;
+}
+
+/* RESPONSIVE */
+@media(max-width: 900px) {
+    .admin-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 600px) {
+    .admin-cards {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .admin-container {
+        padding: 20px;
     }
 }
