@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión - MatchaSalon</title>
+    <title>Carrito - MatchaSalon</title>
     <link rel="stylesheet" href="CSS/style.css">
 </head>
 
@@ -24,7 +24,8 @@
                 <li><a href="Servicios.html">Servicios</a></li>
                 <li><a href="Productos.html">Productos</a></li>
                 <li><a href="citas.html">Agendar Citas</a></li>
-                <!-- Ícono del carrito -->
+
+                <!-- Carrito -->
                 <li class="cart-icon">
                     <a href="carrito.html" aria-label="Carrito">
                         <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
@@ -34,55 +35,42 @@
                             <circle cx="10" cy="19" r="1" fill="#5E925C"/>
                             <circle cx="17" cy="19" r="1" fill="#5E925C"/>
                         </svg>
-
-                        <!-- Contador -->
                         <span id="cart-count">0</span>
                     </a>
                 </li>
 
-                <!-- Ícono Login -->
+                <!-- Login -->
                 <li class="login-icon">
                     <a href="login.html" aria-label="Iniciar Sesión">
-                        <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="26" height="26">
                             <circle cx="12" cy="7" r="4" stroke="#5E925C" stroke-width="2" fill="none"/>
-                            <path d="M4 20c0-4 4-6 8-6s8 2 8 6" 
+                            <path d="M4 20c0-4 4-6 8-6s8 2 8 6"
                                   stroke="#5E925C" stroke-width="2" fill="none" stroke-linecap="round"/>
                         </svg>
                     </a>
                 </li>
-
             </ul>
         </nav>
+
     </div>
 </header>
 
 
-<main class="login-main">
+<!-- CONTENIDO DEL CARRITO -->
+<main class="container" style="padding: 120px 0;">
 
-    <section class="login-section">
-        <div class="login-card">
+    <h1 style="text-align:center; margin-bottom:30px;">Tu Carrito</h1>
 
-            <h2>Iniciar Sesión</h2>
-            <p>Accede para gestionar tus citas y preferencias.</p>
+    <div id="cart-container" class="cart-container">
 
-            <form id="login-form">
-                
-                <label class="login-label">Correo electrónico</label>
-                <input type="email" class="login-input" required placeholder="Ej: usuario@gmail.com">
+        <!-- Aquí JS llenará los productos -->
+        
+    </div>
 
-                <label class="login-label">Contraseña</label>
-                <input type="password" class="login-input" required placeholder="••••••••">
-
-                <button type="submit" class="login-btn">Entrar</button>
-
-                <p class="login-forgot">
-                <a href="#">¿Olvidaste tu contraseña?</a>
-                </p>
-
-            </form>
-
-        </div>
-    </section>
+    <div class="cart-summary">
+        <h2>Total: <span id="cart-total">$0.00</span></h2>
+        <button id="clear-cart" class="login-btn" style="margin-top:10px;">Vaciar Carrito</button>
+    </div>
 
 </main>
 
@@ -99,7 +87,7 @@
              <div class="link">
                 <h3>Redes sociales</h3>
                 <ul>
-                    <li><a href="#">Instragram| @Matcha_Salon</a></li>
+                    <li><a href="#">Instagram | @Matcha_Salon</a></li>
                     <li><a href="#">Correo | matchasalon@gmail.com </a></li>
                 </ul>
             </div>
@@ -115,16 +103,15 @@
              <div class="link">
                 <h3>Sucursales</h3>
                 <ul>
-                    <li><a href="#">San Francisco| 7am a 5pm</a></li>
-                    <li><a href="#">Santa Maria| 7am a 5pm</a></li>
-                    <li><a href="#">Via España| 7am a 5pm</a></li>
-                    <li><a href="#">Telefono| 300-000</a></li>
+                    <li><a href="#">San Francisco | 7am a 5pm</a></li>
+                    <li><a href="#">Santa Maria | 7am a 5pm</a></li>
+                    <li><a href="#">Via España | 7am a 5pm</a></li>
+                    <li><a href="#">Telefono | 300-000</a></li>
                 </ul>
             </div>
         </div>
     </footer>
 
-<script src="JS/login.js"></script>
-
+<script src="JS/cart.js"></script>
 </body>
 </html>

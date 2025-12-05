@@ -936,3 +936,103 @@ a {
         padding: 20px;
     }
 }
+.price-btn {
+    width: 85%;
+    margin: 15px auto 0;
+    display: block;
+    text-align: center;
+    background-color: #8dce88;
+    color: white;
+    border: none;
+    padding: 14px 0;
+    font-size: 18px;
+    border-radius: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.price-btn:hover {
+    background-color: #76b972;
+    transform: scale(1.03);
+}
+/* ---- CARRITO EN NAV ---- */
+.cart-icon {
+    position: relative;
+    margin-left: 15px;
+}
+
+.cart-icon a {
+    display: flex;
+    align-items: center;
+}
+
+#cart-count {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    background-color: #76b972;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
+.cart-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    padding: 12px 0;
+}
+
+.cart-item-name {
+    font-weight: bold;
+    color: #303030;
+}
+
+.cart-item-controls button {
+    background-color: #76b972;
+    border: none;
+    color: white;
+    font-size: 16px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    margin: 0 3px;
+    cursor: pointer;
+}
+
+.cart-item-controls button:hover {
+    background-color: #5E925C;
+}
+
+.cart-summary {
+    text-align: center;
+    margin-top: 25px;
+}
+/* ---------- BADGE DEL CARRITO ---------- */
+.cart-icon {
+    position: relative;
+}
+
+#cart-count {
+    position: absolute;
+    top: 8px;       /* ← Ajusta altura */
+    right: -8px;     /* ← Ajusta desplazamiento lateral */
+    background-color: #5E925C;
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 50%;
+    display: inline-block;
+    min-width: 18px;
+    text-align: center;
+    line-height: 1.2;
+}

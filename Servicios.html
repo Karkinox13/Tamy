@@ -23,6 +23,21 @@
                 <li><a href="Servicios.html">Servicios</a></li>
                 <li><a href="Productos.html">Productos</a></li>
                 <li><a href="citas.html">Agendar Citas</a></li>
+                                <!-- Ícono del carrito -->
+                <li class="cart-icon">
+                    <a href="carrito.html" aria-label="Carrito">
+                        <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M6 6h15l-2 9H8L6 6zm0 0H3"
+                                stroke="#5E925C" stroke-width="2" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="10" cy="19" r="1" fill="#5E925C"/>
+                            <circle cx="17" cy="19" r="1" fill="#5E925C"/>
+                        </svg>
+
+                        <!-- Contador -->
+                        <span id="cart-count">0</span>
+                    </a>
+                </li>
 
                 <li class="login-icon">
                     <a href="login.html" aria-label="Iniciar Sesión">
@@ -50,56 +65,81 @@
 
     <div class="service-list">
 
-        <!-- MANICURE + ESMALTADO -->
-        <div class="service-card">
-            <img src="Imagen/esmaltado.jpg" alt="">
-            <h3>Manicure + Esmaltado</h3>
-            <p>Incluye limpieza, forma, cutícula y esmaltado profesional.</p>
-            <span>$25.00</span>
-        </div>
+    <div class="service-card">
+        <img src="Imagen/esmaltado.jpg" alt="">
+        <h3>Manicure + Esmaltado</h3>
+        <p>Incluye limpieza, forma, cutícula y esmaltado profesional.</p>
 
-        <!-- PEDICURE SPA -->
-        <div class="service-card">
-            <img src="Imagen/pedicure.jpg" alt="">
-            <h3>Pedicure Spa + Esmaltado</h3>
-            <p>Servicio relajante con exfoliación, hidratación y esmaltado.</p>
-            <span>$20.00</span>
-        </div>
-
-        <!-- CORTE DE CABELLO -->
-        <div class="service-card">
-            <img src="Imagen/cortes.jpg" alt="">
-            <h3>Corte de Cabello</h3>
-            <p>Corte profesional para todo tipo de cabello.</p>
-            <span>$30.00</span>
-        </div>
-
-        <!-- HIGHLIGHTS -->
-        <div class="service-card">
-            <img src="Imagen/coloracion.jpg" alt="">
-            <h3>Highlights</h3>
-            <p>Iluminación natural para aportar brillo y contraste al cabello.</p>
-            <span>$80.00</span>
-        </div>
-
-        <!-- MANICURE + DISEÑOS -->
-        <div class="service-card">
-            <img src="Imagen/uñasverdes.jpg" alt="">
-            <h3>Manicure + Diseños</h3>
-            <p>Incluye manicure completo y diseños personalizados.</p>
-            <span>$35.00</span>
-        </div>
-
-        <!-- LIMPIEZA FACIAL + HIDRATACIÓN -->
-        <div class="service-card">
-            <img src="Imagen/facial.jpg" alt="">
-            <h3>Limpieza Facial + Hidratación</h3>
-            <p>Incluye limpieza profunda, extracción e hidratación nutritiva.</p>
-            <span>$60.00</span>
-        </div>
-
+        <button class="price-btn"
+                data-nombre="Manicure + Esmaltado"
+                data-precio="25.00">
+            Añadir — $25.00
+        </button>
     </div>
-</section>
+
+    <div class="service-card">
+        <img src="Imagen/pedicure.jpg" alt="">
+        <h3>Pedicure Spa + Esmaltado Liso</h3>
+        <p>Servicio relajante con exfoliación, hidratación y esmaltado.</p>
+
+        <button class="price-btn"
+                data-nombre="Pedicure Spa + Esmaltado Liso"
+                data-precio="20.00">
+            Añadir — $20.00
+        </button>
+    </div>
+
+    <div class="service-card">
+        <img src="Imagen/cortes.jpg" alt="">
+        <h3>Corte de Cabello</h3>
+        <p>Corte profesional para todo tipo de cabello.</p>
+
+        <button class="price-btn"
+                data-nombre="Corte de Cabello"
+                data-precio="30.00">
+            Añadir — $30.00
+        </button>
+    </div>
+
+    <div class="service-card">
+        <img src="Imagen/coloracion.jpg" alt="">
+        <h3>Highlights</h3>
+        <p>Highlights que aportan luminosidad de manera sutil a tu cabello.</p>
+
+        <button class="price-btn"
+                data-nombre="Highlights"
+                data-precio="80.00">
+            Añadir — $80.00
+        </button>
+    </div>
+
+    <div class="service-card">
+        <img src="Imagen/uñasverdes.jpg" alt="">
+        <h3>Manicure + Diseños</h3>
+        <p>Incluye limpieza, forma, cutícula y esmaltado + diseños a preferencia.</p>
+
+        <button class="price-btn"
+                data-nombre="Manicure + Diseños"
+                data-precio="35.00">
+            Añadir — $35.00
+        </button>
+    </div>
+
+    <div class="service-card">
+        <img src="Imagen/facial.jpg" alt="">
+        <h3>Limpieza Facial + Hidratación</h3>
+        <p>Incluye limpieza, extracción e hidratación.</p>
+
+        <button class="price-btn"
+                data-nombre="Limpieza Facial + Hidratación"
+                data-precio="60.00">
+            Añadir — $60.00
+        </button>
+    </div>
+
+</div>
+
+
 
 
 <footer class="footer container">
@@ -142,4 +182,5 @@
 </footer>
 
 </body>
+<script src="carrito.js"></script>
 </html>
