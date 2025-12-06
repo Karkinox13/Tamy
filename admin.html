@@ -8,18 +8,6 @@
 </head>
 
 <body class="admin-body">
-<script>
-  (function () {
-    try {
-      const usuario = JSON.parse(localStorage.getItem("usuarioConectado"));
-      if (!usuario || usuario.rol !== "admin") {
-        window.location.replace("index.html");
-      }
-    } catch (e) {
-      window.location.replace("index.html");
-    }
-  })();
-</script>
     <!-- BARRA SUPERIOR -->
     <header class="admin-header">
         <h2>Panel Administrativo</h2>
@@ -110,7 +98,14 @@
 
 <script src="JS/session.js"></script>
 <script src="JS/carrito.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const usuario = JSON.parse(localStorage.getItem("usuarioConectado"));
 
-
+    if (!usuario || usuario.rol !== "admin") {
+        window.location.replace("index.html");
+    }
+});
+</script>
 </body>
 </html>

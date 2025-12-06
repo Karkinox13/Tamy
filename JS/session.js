@@ -1,10 +1,23 @@
 // ===============================
-//   EVITAR EJECUCIÓN EN ADMIN.HTML
+//   MANEJO ESPECIAL PARA ADMIN.HTML
 // ===============================
 if (window.location.pathname.includes("admin.html")) {
-    // No ejecutamos el manejo de user-area aquí
-    // porque admin.html no tiene #user-area
     document.addEventListener("DOMContentLoaded", () => {
+
+        const usuario = JSON.parse(localStorage.getItem("usuarioConectado"));
+        const userArea = document.getElementById("user-area");
+
+        // Si existe sesión y es admin → mostrar info
+        if (usuario && usuario.rol === "admin" && userArea) {
+            userArea.innerHTML = `
+                <span style="color:#5E925C; font-weight:700;">Admin</span>
+                <button id="logout-btn"
+                        style="margin-left:10px;background:#ff5b5b;border:none;color:white;padding:6px 10px;border-radius:8px;cursor:pointer;">
+                    Salir
+                </button>`;
+        }
+
+        // Botón salir
         const logoutBtn = document.getElementById("logout-btn");
         if (logoutBtn) {
             logoutBtn.addEventListener("click", () => {
@@ -13,19 +26,21 @@ if (window.location.pathname.includes("admin.html")) {
             });
         }
     });
-    return;
+
+    // IMPORTANTE: NO HACEMOS return;
+    // Ahora admin.html también puede manejar user-area normalmente
 }
 
 
 // ===============================
-//  MOSTRAR NOMBRE DEL USUARIO
+//  MOSTRAR NOMBRE DEL USUARIO EN TODAS LAS DEMÁS PÁGINAS
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
+
     const userArea = document.getElementById("user-area");
     if (!userArea) return;
 
     const usuario = JSON.parse(localStorage.getItem("usuarioConectado"));
-
     if (!usuario) return;
 
     if (usuario.rol === "admin") {
@@ -48,7 +63,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 cursor:pointer;
             ">Salir</button>
         `;
+
     } else {
+
         userArea.innerHTML = `
             <span style="color:#5E925C; font-weight:700;">Hola, ${usuario.nombre}</span>
 
@@ -64,6 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
     }
 
+    // Evento salir
     const logoutBtn = document.getElementById("logout-btn");
     logoutBtn.addEventListener("click", () => {
         localStorage.removeItem("usuarioConectado");
