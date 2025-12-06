@@ -1,27 +1,3 @@
-
-// ===============================
-//   VALIDAR CARRITO VIEJO
-// ==============================
-
-let carritoInvalido = false;
-
-for (const key in carrito) {
-    // si falta precio o cantidad → formato viejo → borrar
-    if (
-        typeof carrito[key].precio !== "number" ||
-        typeof carrito[key].cantidad !== "number"
-    ) {
-        carritoInvalido = true;
-        break;
-    }
-}
-
-if (carritoInvalido) {
-    console.warn("🧹 Carrito viejo detectado → limpiando...");
-    carrito = {};
-    localStorage.setItem("carrito", JSON.stringify(carrito));
-}
-
 // ===============================
 //  CARGAR CARRITO DESDE STORAGE
 // ===============================
@@ -159,7 +135,7 @@ function cargarCarritoEnPagina() {
                     <button class="plus" data-nombre="${nombre}" data-precio="${item.precio}">+</button>
                 </div>
 
-                <span class="cart-item-price">$${(item.precio * item.cantidad).toFixed(2)}</span>
+                <span>$${(item.precio * item.cantidad).toFixed(2)}</span>
             </div>
         `;
     }
