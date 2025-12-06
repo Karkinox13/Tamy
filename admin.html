@@ -8,13 +8,24 @@
 </head>
 
 <body class="admin-body">
-
+<script>
+  (function () {
+    try {
+      const usuario = JSON.parse(localStorage.getItem("usuarioConectado"));
+      if (!usuario || usuario.rol !== "admin") {
+        window.location.replace("index.html");
+      }
+    } catch (e) {
+      window.location.replace("index.html");
+    }
+  })();
+</script>
     <!-- BARRA SUPERIOR -->
     <header class="admin-header">
         <h2>Panel Administrativo</h2>
 
         <!-- Ícono usuario -->
-        <a href="login.html" class="admin-user-icon" id="logout-btn">
+        <a href="#" class="admin-user-icon" id="user-area">
             <svg viewBox="0 0 24 24" width="28" height="28">
                 <circle cx="12" cy="7" r="4" stroke="#5E925C" stroke-width="2" fill="none"/>
                 <path d="M4 20c0-4 4-6 8-6s8 2 8 6" 
@@ -96,27 +107,9 @@
 
     </main>
 
-    <!-- ================== SCRIPTS ================== -->
-    <!-- Protege acceso al panel y maneja sesión -->
-    <script src="JS/session.js"></script>
 
-    <!-- Carrito si usas navbar coherente en admin (opcional) -->
-    <script src="JS/carrito.js"></script>
-
-<script>
-  // Guard estricto para el panel admin (sesión unificada)
-  (function () {
-    try {
-      const usuario = JSON.parse(localStorage.getItem("usuarioConectado"));
-      if (!usuario || usuario.rol !== "admin") {
-        window.location.replace("index.html");
-      }
-    } catch (e) {
-      window.location.replace("index.html");
-    }
-  })();
-</script>
-
+<script src="JS/session.js"></script>
+<script src="JS/carrito.js"></script>
 
 
 </body>
