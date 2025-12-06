@@ -92,6 +92,11 @@
         </section>
 
     </main>
-
+<script>
+    const usuario = JSON.parse(localStorage.getItem("usuarioConectado"));
+    if (!usuario || usuario.rol !== "admin") {
+        window.location.href = "login.html";
+    }
+</script>
 </body>
 </html>
