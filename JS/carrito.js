@@ -1,73 +1,51 @@
-// Cargar carrito
+// ===============================
+//  CARGAR CARRITO DESDE STORAGE
+// ===============================
 let carrito = JSON.parse(localStorage.getItem("carrito")) || {};
 
-// Sincronizar cantidades visibles en las cards al cargar la página
+
+// ===============================
+//   ACTUALIZAR CONTADOR NAVBAR
+// ===============================
+function actualizarContador() {
+    let total = 0;
+    for (const key in carrito) {
+        total += carrito[key].cantidad;
+    }
+    const badge = document.getElementById("cart-count");
+    if (badge) badge.textContent = total;
+}
+actualizarContador();
+
+
+// ===============================
+//   GUARDAR CARRITO
+// ===============================
+function guardarCarrito() {
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+}
+
+
+// ===============================
+//   SINCRONIZAR CANTIDADES EN SERVICIOS/PRODUCTOS
+// ===============================
 function sincronizarServicios() {
     const displays = document.querySelectorAll(".qty-display");
 
     displays.forEach(display => {
         let nombre = display.getAttribute("data-nombre");
 
-        if (carrito[nombre]) {
-            display.textContent = carrito[nombre].cantidad;
-        } else {
-            display.textContent = "0";
-        }
+        display.textContent = carrito[nombre]
+            ? carrito[nombre].cantidad
+            : "0";
     });
 }
-
-// Ejecutar la sincronización al entrar a la página
 document.addEventListener("DOMContentLoaded", sincronizarServicios);
 
-// VALIDACIÓN PARA BORRAR CARRITO VIEJO
-let carritoInvalido = false;
 
-for (const key in carrito) {
-    if (
-        !carrito[key].hasOwnProperty("precio") ||
-        !carrito[key].hasOwnProperty("cantidad")
-    ) {
-        carritoInvalido = true;
-        break;
-    }
-}
-
-if (carritoInvalido) {
-    carrito = {};
-    localStorage.setItem("carrito", JSON.stringify(carrito));
-}
-
-// Función para actualizar el contador del navbar
-function actualizarContador() {
-    let total = 0;
-    for (const key in carrito) {
-        total += carrito[key].cantidad;
-    }
-    document.getElementById("cart-count").textContent = total;
-}
-
-
-actualizarContador();
-
-// ========== MANEJO DE BOTONES + Y - ==========
-document.addEventListener("click", function (e) {
-
-    // BOTÓN +
-    if (e.target.classList.contains("plus")) {
-        let nombre = e.target.dataset.nombre;
-        let precio = parseFloat(e.target.dataset.precio);
-
-        agregarProducto(nombre, precio);
-    }
-
-    // BOTÓN -
-    if (e.target.classList.contains("minus")) {
-        let nombre = e.target.dataset.nombre;
-        quitarProducto(nombre);
-    }
-});
-
-// ========== FUNCIONES PRINCIPALES ==========
+// ===============================
+//   AGREGAR PRODUCTO
+// ===============================
 function agregarProducto(nombre, precio) {
     if (!carrito[nombre]) {
         carrito[nombre] = { cantidad: 1, precio: precio };
@@ -75,11 +53,16 @@ function agregarProducto(nombre, precio) {
         carrito[nombre].cantidad++;
     }
 
-    actualizarDisplay(nombre);
     guardarCarrito();
     actualizarContador();
+    sincronizarServicios();
+    cargarCarritoEnPagina();
 }
 
+
+// ===============================
+//   QUITAR PRODUCTO
+// ===============================
 function quitarProducto(nombre) {
     if (!carrito[nombre]) return;
 
@@ -89,34 +72,75 @@ function quitarProducto(nombre) {
         delete carrito[nombre];
     }
 
-    actualizarDisplay(nombre);
     guardarCarrito();
     actualizarContador();
+    sincronizarServicios();
+    cargarCarritoEnPagina();
 }
 
-// ========== ACTUALIZA EL NÚMERO EN LA CARD ==========
-function actualizarDisplay(nombre) {
-    let display = document.querySelector(`.qty-display[data-nombre="${nombre}"]`);
-    if (display) {
-        display.textContent = carrito[nombre] ? carrito[nombre].cantidad : 0;
+
+// ===============================
+//   LISTENERS GLOBAL: + y -
+// ===============================
+document.addEventListener("click", function (e) {
+
+    if (e.target.classList.contains("plus")) {
+        const nombre = e.target.dataset.nombre;
+        const precio = parseFloat(e.target.dataset.precio);
+
+        agregarProducto(nombre, precio);
     }
-}
 
-// ========== GUARDA EN LOCALSTORAGE ==========
-function guardarCarrito() {
-    localStorage.setItem("carrito", JSON.stringify(carrito));
-}
+    if (e.target.classList.contains("minus")) {
+        const nombre = e.target.dataset.nombre;
+        quitarProducto(nombre);
+    }
 
-// ========== ACTUALIZA EL CONTADOR DEL NAVBAR ==========
-function actualizarContador() {
+    if (e.target.id === "clear-cart") {
+        carrito = {};
+        guardarCarrito();
+        actualizarContador();
+        cargarCarritoEnPagina();
+    }
+});
+
+
+// ===============================
+//   MOSTRAR CARRITO EN carrito.html
+// ===============================
+function cargarCarritoEnPagina() {
+    const container = document.getElementById("cart-items");
+    const totalText = document.getElementById("cart-total");
+
+    if (!container) return;
+
+    container.innerHTML = ""; // limpiar
+
     let total = 0;
 
-    for (let item in carrito) {
-        total += carrito[item].cantidad;
+    for (let nombre in carrito) {
+        const item = carrito[nombre];
+
+        total += item.precio * item.cantidad;
+
+        container.innerHTML += `
+            <div class="cart-item">
+                <span class="cart-item-name">${nombre}</span>
+
+                <div class="cart-item-controls">
+                    <button class="minus" data-nombre="${nombre}">−</button>
+
+                    <span>${item.cantidad}</span>
+
+                    <button class="plus" data-nombre="${nombre}" data-precio="${item.precio}">+</button>
+                </div>
+
+                <span class="cart-item-price">$${(item.precio * item.cantidad).toFixed(2)}</span>
+            </div>
+        `;
     }
 
-    let contador = document.getElementById("cart-count");
-    if (contador) {
-        contador.textContent = total;
-    }
+    totalText.textContent = `$${total.toFixed(2)}`;
 }
+
+document.addEventListener("DOMContentLoaded", cargarCarritoEnPagina);
