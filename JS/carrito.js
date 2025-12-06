@@ -1,19 +1,53 @@
 // ===============================
-//  CARGAR CARRITO DESDE STORAGE
+//   CARGAR CARRITO DESDE STORAGE
 // ===============================
 let carrito = JSON.parse(localStorage.getItem("carrito")) || {};
+
+
+// ===============================
+//   VALIDAR CARRITO VIEJO (FIX ERROR cantidad)
+// ===============================
+let formatoInvalido = false;
+
+for (const key in carrito) {
+    let item = carrito[key];
+
+    // Si el dato no es OBJETO → está en formato viejo (por ej: "Servicio": 2)
+    if (typeof item !== "object" || item === null) {
+        formatoInvalido = true;
+        break;
+    }
+
+    // Si falta precio o cantidad → también es inválido
+    if (!item.hasOwnProperty("precio") || !item.hasOwnProperty("cantidad")) {
+        formatoInvalido = true;
+        break;
+    }
+}
+
+if (formatoInvalido) {
+    console.warn("🧹 Carrito viejo detectado → limpiando...");
+    carrito = {};
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+}
+
 
 // ===============================
 //   ACTUALIZAR CONTADOR NAVBAR
 // ===============================
 function actualizarContador() {
     let total = 0;
+
     for (const key in carrito) {
-        total += carrito[key].cantidad;
+        if (carrito[key] && typeof carrito[key].cantidad === "number") {
+            total += carrito[key].cantidad;
+        }
     }
+
     const badge = document.getElementById("cart-count");
     if (badge) badge.textContent = total;
 }
+
 actualizarContador();
 
 
@@ -26,13 +60,13 @@ function guardarCarrito() {
 
 
 // ===============================
-//   SINCRONIZAR CANTIDADES EN SERVICIOS/PRODUCTOS
+//   SINCRONIZAR CANTIDADES EN LAS CARDS
 // ===============================
 function sincronizarServicios() {
     const displays = document.querySelectorAll(".qty-display");
 
     displays.forEach(display => {
-        let nombre = display.getAttribute("data-nombre");
+        let nombre = display.dataset.nombre;
 
         display.textContent = carrito[nombre]
             ? carrito[nombre].cantidad
@@ -79,14 +113,13 @@ function quitarProducto(nombre) {
 
 
 // ===============================
-//   LISTENERS GLOBAL: + y -
+//   LISTENERS GLOBALES (+ y -)
 // ===============================
 document.addEventListener("click", function (e) {
 
     if (e.target.classList.contains("plus")) {
         const nombre = e.target.dataset.nombre;
         const precio = parseFloat(e.target.dataset.precio);
-
         agregarProducto(nombre, precio);
     }
 
@@ -113,7 +146,7 @@ function cargarCarritoEnPagina() {
 
     if (!container) return;
 
-    container.innerHTML = ""; // limpiar
+    container.innerHTML = ""; 
 
     let total = 0;
 
@@ -128,13 +161,11 @@ function cargarCarritoEnPagina() {
 
                 <div class="cart-item-controls">
                     <button class="minus" data-nombre="${nombre}">−</button>
-
                     <span>${item.cantidad}</span>
-
                     <button class="plus" data-nombre="${nombre}" data-precio="${item.precio}">+</button>
                 </div>
 
-                <span>$${(item.precio * item.cantidad).toFixed(2)}</span>
+                <span class="cart-item-price">$${(item.precio * item.cantidad).toFixed(2)}</span>
             </div>
         `;
     }
