@@ -1,3 +1,27 @@
+
+// ===============================
+//   VALIDAR CARRITO VIEJO
+// ==============================
+
+let carritoInvalido = false;
+
+for (const key in carrito) {
+    // si falta precio o cantidad → formato viejo → borrar
+    if (
+        typeof carrito[key].precio !== "number" ||
+        typeof carrito[key].cantidad !== "number"
+    ) {
+        carritoInvalido = true;
+        break;
+    }
+}
+
+if (carritoInvalido) {
+    console.warn("🧹 Carrito viejo detectado → limpiando...");
+    carrito = {};
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+}
+
 // ===============================
 //  CARGAR CARRITO DESDE STORAGE
 // ===============================
