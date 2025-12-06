@@ -1036,3 +1036,51 @@ a {
     text-align: center;
     line-height: 1.2;
 }
+.service-price {
+    display: inline-block;
+    background-color: #76b972;
+    padding: 10px 25px;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 15px;
+    font-size: 18px;
+    margin-top: 10px;
+}
+.service-controls {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.qty-btn {
+    background-color: #5E925C;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.qty-btn:hover {
+    background-color: #4b7a49;
+}
+
+.qty-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;        /* tamaño horizontal */
+    height: 40px;       /* tamaño vertical */
+    background-color: #e9f3e8;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #303030;
+    margin: 0 8px;
+}
+
