@@ -1,44 +1,57 @@
-// Crear carrito si no existe
-if (!localStorage.getItem("carrito")) {
-    localStorage.setItem("carrito", JSON.stringify([]));
-}
+console.log("carrito.js cargado OK");
 
-// Actualizar contador
-function actualizarCarritoNav() {
-    let carrito = JSON.parse(localStorage.getItem("carrito"));
-    let total = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+// ======================= Cargar carrito =========================
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
+// ======================= Actualizar contador ======================
+function actualizarContador() {
     const badge = document.getElementById("cart-count");
-    if (badge) badge.textContent = total;
+
+    if (!badge) {
+        console.warn("No se encontró #cart-count");
+        return;
+    }
+
+    let total = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+    badge.textContent = total;
 }
 
-// Escuchar clicks en botones de agregar
-document.addEventListener("click", function(e) {
+// ======================= Agregar al carrito =======================
+function agregarAlCarrito(nombre, precio) {
+    let item = carrito.find(x => x.nombre === nombre);
 
-    if (e.target.classList.contains("price-btn")) {
-
-        let nombre = e.target.dataset.nombre;
-        let precio = parseFloat(e.target.dataset.precio);
-
-        let carrito = JSON.parse(localStorage.getItem("carrito"));
-
-        let item = carrito.find(p => p.nombre === nombre);
-
-        if (item) {
-            item.cantidad++;
-        } else {
-            carrito.push({
-                nombre: nombre,
-                precio: precio,
-                cantidad: 1
-            });
-        }
-
-        localStorage.setItem("carrito", JSON.stringify(carrito));
-        actualizarCarritoNav();
-        alert(nombre + " añadido al carrito ✔");
+    if (item) {
+        item.cantidad++;
+    } else {
+        carrito.push({
+            nombre: nombre,
+            precio: parseFloat(precio),
+            cantidad: 1
+        });
     }
-});
 
-// Cargar contador al iniciar
-actualizarCarritoNav();
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    actualizarContador();
+}
+
+// ======================= Detectar botones =========================
+function activarBotones() {
+    const botones = document.querySelectorAll(".price-btn");
+
+    console.log("Botones detectados:", botones.length);
+
+    botones.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const nombre = btn.dataset.nombre;
+            const precio = btn.dataset.precio;
+
+            agregarAlCarrito(nombre, precio);
+        });
+    });
+}
+
+// ======================= On Load =========================
+document.addEventListener("DOMContentLoaded", () => {
+    actualizarContador();
+    activarBotones();
+});
