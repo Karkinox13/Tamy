@@ -1137,3 +1137,8 @@ a {
     display: flex;
     flex-direction: column;
 }
+.login-register a {
+    color: #5E925C;
+    font-size: 15px;
+    text-decoration: none;
+}
