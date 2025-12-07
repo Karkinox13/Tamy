@@ -1,7 +1,9 @@
-// JS/login.js
-// Login en texto plano contra localStorage["usuarios"].
-// Guarda sesión en localStorage["usuarioConectado"].
-// Redirige: admin -> admin.html, usuario -> index.html.
+/* ===========================================================
+   LOGIN – VERSIÓN FINAL
+   -----------------------------------------------------------
+   Usa la lista real en localStorage["usuarios"]
+   Conserva tus usuarios y sesión normalmente
+   =========================================================== */
 
 document.getElementById("login-form")?.addEventListener("submit", function (e) {
   e.preventDefault();
@@ -20,7 +22,6 @@ document.getElementById("login-form")?.addEventListener("submit", function (e) {
   localStorage.setItem("usuarioConectado", JSON.stringify(user));
 
   if (user.rol === "admin") {
-    // Ir al panel admin
     window.location.href = "admin.html";
   } else {
     window.location.href = "index.html";

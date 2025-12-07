@@ -211,6 +211,53 @@
 </footer>
 
 <script src="JS/carrito.js"></script>
+<script>
+/* ============================================================
+   PRODUCTOS DINÁMICOS PARA TIENDA – MATCHASALON
+   ============================================================ */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const contenedor = document.querySelector(".service-list");
+    if (!contenedor) return;
+
+    const productos = JSON.parse(localStorage.getItem("productos")) || [];
+
+    contenedor.innerHTML = ""; // limpiar productos estáticos
+
+    productos.forEach(prod => {
+        contenedor.innerHTML += `
+            <div class="service-card">
+
+                <img src="${prod.imagen}" alt="${prod.nombre}">
+
+                <h3>${prod.nombre}</h3>
+
+                <p>${prod.descripcion}</p>
+
+                <span class="service-price">$${prod.precio.toFixed(2)}</span>
+
+                <div class="service-controls">
+                    <button class="qty-btn minus"
+                        data-nombre="${prod.nombre}"
+                        data-precio="${prod.precio}">−</button>
+
+                    <span class="qty-display"
+                        data-nombre="${prod.nombre}">0</span>
+
+                    <button class="qty-btn plus"
+                        data-nombre="${prod.nombre}"
+                        data-precio="${prod.precio}">+</button>
+                </div>
+
+            </div>
+        `;
+    });
+
+    sincronizarServicios(); // función del carrito para que muestre cantidades correctas
+});
+</script>
+
 <script src="JS/session.js"></script>
 </body>
 </html>

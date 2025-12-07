@@ -1,43 +1,67 @@
-/* JS/initAdmin.js
-   - Fuente única: localStorage["usuarios"]
-   - Estructura: { nombre, email, password, rol }
-   - Admin semilla: email admin@matcha.com / password 123456 / rol admin
-   - Migra automáticamente de la antigua clave "users" (si existe)
-*/
+/* ===========================================================
+   JS/initAdmin.js  (VERSIÓN FINAL)
+   -----------------------------------------------------------
+   - Fuente principal: localStorage["usuarios"]
+   - Estructura válida: { nombre, email, password, rol }
+   - Admin semilla garantizado:
+        email: admin@matcha.com
+        pass : 123456
+        rol  : admin
+   - Migración automática desde "users" → "usuarios" (si existía)
+   - No usa console ni requiere interacción del usuario
+   =========================================================== */
+
 (function () {
-  // 1) Migrar de "users" (antiguo) a "usuarios" (nuevo)
+
+  /* ===========================================================
+     1) MIGRAR DESDE "users" (sistema viejo) → "usuarios"
+     =========================================================== */
   try {
     const legacy = JSON.parse(localStorage.getItem("users"));
-    if (Array.isArray(legacy) && legacy.length) {
-      // Normalizar legacy -> usuarios (password en texto plano)
-      const migrados = legacy.map((u) => ({
-        nombre: u.nombre || "Usuario",
-        email:  u.email,
-        // si venía con base64, no podemos revertirlo sin saberlo; asumimos ya venía en texto plano o lo sobreescribirá el user
-        password: u.password || u.pass || "", 
-        rol: u.rol || "usuario",
+
+    if (Array.isArray(legacy) && legacy.length > 0) {
+
+      // Convertir estructura vieja a la nueva
+      const migrados = legacy.map(u => ({
+        nombre:  u.nombre  || "Usuario",
+        email:   u.email,
+        password: u.password || u.pass || "",  // sin decodificar
+        rol:     u.rol || "usuario",
       }));
+
       const actuales = JSON.parse(localStorage.getItem("usuarios")) || [];
-      // fusionar evitando duplicados por email (preferir actuales)
-      const map = new Map(actuales.map(u => [u.email, u]));
-      migrados.forEach(u => { if (!map.has(u.email)) map.set(u.email, u); });
-      localStorage.setItem("usuarios", JSON.stringify(Array.from(map.values())));
-      localStorage.removeItem("users");
+
+      // Fusionar SIN duplicar emails (prioridad a "actuales")
+      const mapa = new Map(actuales.map(u => [u.email, u]));
+
+      for (const u of migrados) {
+        if (!mapa.has(u.email)) mapa.set(u.email, u);
+      }
+
+      localStorage.setItem("usuarios", JSON.stringify(Array.from(mapa.values())));
+      localStorage.removeItem("users"); // limpiar sistema viejo
     }
   } catch (e) {
-    // ignorar
+    // Silencio para evitar errores en UI
   }
 
-  // 2) Asegurar admin de prueba en "usuarios"
+
+  /* ===========================================================
+     2) GARANTIZAR QUE EXISTA EL ADMIN
+     =========================================================== */
   let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
   const existeAdmin = usuarios.some(u => u.email === "admin@matcha.com");
+
   if (!existeAdmin) {
     usuarios.push({
       nombre: "Administrador",
       email: "admin@matcha.com",
-      password: "123456", // plano
+      password: "123456",
       rol: "admin",
     });
+
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
   }
+
 })();
