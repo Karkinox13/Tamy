@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Administrativo – MatchaSalon</title>
 
     <link rel="stylesheet" href="CSS/style.css" />
@@ -26,6 +26,7 @@
         <ul class="sidebar-menu">
             <li data-section="dashboard" class="active">📊 Dashboard</li>
             <li data-section="usuarios">👥 Usuarios</li>
+            <li data-section="estilistas">💇 Estilistas</li>
             <li data-section="servicios">💅 Servicios</li>
             <li data-section="productos">🛍 Productos</li>
             <li data-section="reservas">📋 Reservas</li>
@@ -76,6 +77,38 @@
                     </tr>
                 </thead>
                 <tbody id="usuarios-body"></tbody>
+            </table>
+        </section>
+
+        <!-- CRUD ESTILISTAS (NUEVO) -->
+        <section id="estilistas" class="admin-section">
+            <h1>Gestión de Estilistas</h1>
+
+            <!-- FORMULARIO AÑADIR ESTILISTA -->
+            <div id="form-add-estilista" style="margin-bottom:20px;">
+                <h3>Agregar Estilista</h3>
+
+                <input type="text" id="est-nombre" placeholder="Nombre" class="input-admin">
+                <input type="text" id="est-especialidad" placeholder="Especialidad" class="input-admin">
+                <input type="text" id="est-telefono" placeholder="Teléfono" class="input-admin">
+                <input type="email" id="est-correo" placeholder="Correo" class="input-admin">
+
+                <button class="btn-primary" id="btn-save-estilista">Guardar Estilista</button>
+            </div>
+
+            <h1>Estilistas</h1>
+
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Especialidad</th>
+                        <th>Teléfono</th>
+                        <th>Correo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="estilistas-body"></tbody>
             </table>
         </section>
 
@@ -180,6 +213,7 @@
                     <tr>
                         <th>Cliente</th>
                         <th>Servicio</th>
+                        <th>Estilista</th>
                         <th>Fecha</th>
                         <th>Estado</th>
                         <th>Acciones</th>

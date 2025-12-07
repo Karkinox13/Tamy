@@ -24,53 +24,54 @@
                     <li><a href="Servicios.html">Servicios</a></li>
                     <li><a href="Productos.html">Productos</a></li>
                     <li><a href="citas.html">Agendar Citas</a></li>
-                    <!-- Ícono del carrito -->
+
                     <li class="cart-icon">
-                        <a href="carrito.html" aria-label="Carrito">
-                            <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
+                        <a href="carrito.html">
+                            <svg width="26" height="26" viewBox="0 0 24 24">
                                 <path d="M6 6h15l-2 9H8L6 6zm0 0H3"
-                                    stroke="#5E925C" stroke-width="2" fill="none"
-                                    stroke-linecap="round" stroke-linejoin="round"/>
+                                    stroke="#5E925C" stroke-width="2" fill="none"/>
                                 <circle cx="10" cy="19" r="1" fill="#5E925C"/>
                                 <circle cx="17" cy="19" r="1" fill="#5E925C"/>
                             </svg>
-
-                            <!-- Contador -->
                             <span id="cart-count">0</span>
                         </a>
                     </li>
+
                     <li class="login-icon">
-                    <a href="login.html" aria-label="Iniciar Sesión">
-                    <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
-                    <circle cx="12" cy="7" r="4" stroke="#5E925C" stroke-width="2" fill="none"/>
-                    <path d="M4 20c0-4 4-6 8-6s8 2 8 6" 
-                     stroke="#5E925C" stroke-width="2" fill="none" stroke-linecap="round"/>
-                     </svg>
-                     </a>
+                        <a href="login.html">
+                            <svg viewBox="0 0 24 24" width="26" height="26">
+                                <circle cx="12" cy="7" r="4" stroke="#5E925C" stroke-width="2" fill="none"/>
+                                <path d="M4 20c0-4 4-6 8-6s8 2 8 6"
+                                    stroke="#5E925C" stroke-width="2" fill="none"/>
+                            </svg>
+                        </a>
                     </li>
+
                 </ul>
             </nav>
         </div>
     </header>
-    <section class="citas-section container">
 
+
+    <!-- =============== FORMULARIO =============== -->
+    <section class="citas-section container">
         <h2>Agendar Cita</h2>
         <p>Completa el formulario para reservar tu cita.</p>
 
         <form id="formCita" class="form-cita">
 
             <div class="grupo-form">
-                <label class="label-cita">Nombre completo</label>
+                <label>Nombre completo</label>
                 <input type="text" id="nombre" class="input-cita" required>
             </div>
 
             <div class="grupo-form">
-                <label class="label-cita">Correo electrónico</label>
+                <label>Correo electrónico</label>
                 <input type="email" id="email" class="input-cita" required>
             </div>
 
             <div class="grupo-form">
-                <label class="label-cita">Servicio</label>
+                <label>Servicio</label>
                 <select id="servicio" class="select-cita" required>
                     <option value="">Seleccione…</option>
                     <option value="Uñas acrílicas">Uñas acrílicas</option>
@@ -81,13 +82,19 @@
             </div>
 
             <div class="grupo-form">
-                <label class="label-cita">Fecha</label>
+                <label>Estilista</label>
+                <select id="estilista" class="select-cita" required>
+                    <option value="">Seleccione…</option>
+                </select>
+            </div>
+
+            <div class="grupo-form">
+                <label>Fecha</label>
                 <input type="date" id="fecha" class="input-cita" required>
             </div>
 
             <div class="grupo-form">
-                <label class="label-cita">Hora</label>
-
+                <label>Hora</label>
                 <select id="hora" class="select-cita" required>
                     <option value="">Seleccione…</option>
                     <option value="7 AM">7 AM</option>
@@ -103,51 +110,50 @@
                 </select>
             </div>
 
-
             <button type="submit" class="btn-agendar">Agendar</button>
             <p id="mensajeConfirmacion" class="confirmacion"></p>
-
         </form>
-
     </section>
 
-
-    <!-- =============== FOOTER =============== -->
+    <!-- FOOTER -->
     <footer class="footer container">
         <div class="footer-links">
             <div class="link">
                 <h3>Contactos</h3>
                 <div class="socials">
-                    <img src="Imagen/s1.svg" alt="">
-                    <img src="Imagen/s3.svg" alt="">
+                    <img src="Imagen/s1.svg">
+                    <img src="Imagen/s3.svg">
                 </div>
             </div>
-             <div class="link">
+            <div class="link">
                 <h3>Redes sociales</h3>
                 <ul>
-                    <li><a href="#">Instragram| @Matcha_Salon</a></li>
-                    <li><a href="#">Correo | matchasalon@gmail.com </a></li>
+                    <li><a>Instagram | @Matcha_Salon</a></li>
+                    <li><a>Correo | matchasalon@gmail.com</a></li>
                 </ul>
             </div>
-             <div class="link">
+            <div class="link">
                 <h3>Servicios</h3>
                 <ul>
-                    <li><a href="#">Manicure</a></li>
-                    <li><a href="#">Pedicure</a></li>
-                    <li><a href="#">Tintes</a></li>
-                    <li><a href="#">Faciales</a></li>
+                    <li><a>Manicure</a></li>
+                    <li><a>Pedicure</a></li>
+                    <li><a>Tintes</a></li>
+                    <li><a>Faciales</a></li>
                 </ul>
             </div>
-             <div class="link">
+            <div class="link">
                 <h3>Sucursales</h3>
                 <ul>
-                    <li><a href="#">San Francisco| 7am a 5pm</a></li>
+                    <li><a>San Francisco | 7am a 5pm</a></li>
                 </ul>
             </div>
         </div>
     </footer>
 
-<script src="JS/session.js"></script>
-<script src="JS/carrito.js"></script>
+    <!-- SCRIPTS -->
+    <script src="JS/session.js"></script>
+    <script src="JS/carrito.js"></script>
+    <script src="JS/citas.js"></script>
+
 </body>
 </html>
